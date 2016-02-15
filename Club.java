@@ -35,14 +35,14 @@ public class Club
     {
         return members.size();
     }
-    
+
     /** 
-    * Calcula el numero de socios que se dieron de alta en un mes determinado. 
-    * El año no nos importa. En caso de que el parametro contenga un valor 
-    * no valido se muestra por pantalla el error.
-    * @param month El mes en el que estamos interesados
-    * @return El numero de socios que se dieron de alta dicho mes
-    */
+     * Calcula el numero de socios que se dieron de alta en un mes determinado. 
+     * El año no nos importa. En caso de que el parametro contenga un valor 
+     * no valido se muestra por pantalla el error.
+     * @param month El mes en el que estamos interesados
+     * @return El numero de socios que se dieron de alta dicho mes
+     */
     public int joinedMonth(int month)
     {
         int cont = 0;
@@ -59,29 +59,31 @@ public class Club
         }
         return cont;
     }
-    
+
     /** 
-    * Todos los socios que se han dado de alta un determinado mes de un determinado año se
-    * dan de baja. En caso de que el parametro month contenga un valor no valido se muestra 
-    * por pantalla el error.
-    * @param month El mes en el que estamos interesados
-    * @param year El año en el que estamos interesados
-    * @return Una coleccion con los socios que se han dado de baja del club
-    */
+     * Todos los socios que se han dado de alta un determinado mes de un determinado año se
+     * dan de baja. En caso de que el parametro month contenga un valor no valido se muestra 
+     * por pantalla el error.
+     * @param month El mes en el que estamos interesados
+     * @param year El año en el que estamos interesados
+     * @return Una coleccion con los socios que se han dado de baja del club
+     */
     public ArrayList<Membership>purge(int month, int year)
     {
         ArrayList<Membership> eliminados = new ArrayList();
         Iterator<Membership> miembros = members.iterator();
-        while (miembros.hasNext()){
-            Membership miembro = miembros.next();
-            if (miembro.getMonth() == month && miembro.getYear() == year){
-                eliminados.add(miembro);
-                miembros.remove();
-            }
-        }
         if(month>12 || month < 1){
             System.out.println("El mes introduccido es erroneo");
             eliminados = null;
+        }
+        else{
+            while (miembros.hasNext()){
+                Membership miembro = miembros.next();
+                if (miembro.getMonth() == month && miembro.getYear() == year){
+                    eliminados.add(miembro);
+                    miembros.remove();
+                }
+            }
         }
         return eliminados;
     }
