@@ -10,14 +10,12 @@ import java.util.Iterator;
 public class Club
 {
     private ArrayList<Membership> members;
-    private int[] miembrosPorMes;
     /**
      * Constructor for objects of class Club
      */
     public Club()
     {
         members = new ArrayList<Membership>();
-        miembrosPorMes = new int[12];
     }
 
     /**
@@ -26,8 +24,6 @@ public class Club
      */
     public void join(Membership member)
     {
-        int mes = member.getMonth();
-        miembrosPorMes[mes-1] = miembrosPorMes[mes-1] + 1;
         members.add(member);
     }
 
@@ -47,16 +43,21 @@ public class Club
     * @param month El mes en el que estamos interesados
     * @return El numero de socios que se dieron de alta dicho mes
     */
-    public String joinedMonth(int month)
+    public int joinedMonth(int month)
     {
-        String miembros;
-        if (month <= 12 && month >= 1){
-             miembros = miembrosPorMes[month-1] + "";
+        int cont = 0;
+        if(month>12 || month < 1){
+            System.out.println("El mes introduccido es erroneo");
+            cont = -1;
         }
         else{
-            miembros = "El número introduccido no corresponde con ningun mes.";
+            for (Membership miembro : members){
+                if (miembro.getMonth() == month){
+                    cont++;
+                }
+            }
         }
-        return miembros;
+        return cont;
     }
     
     /** 
